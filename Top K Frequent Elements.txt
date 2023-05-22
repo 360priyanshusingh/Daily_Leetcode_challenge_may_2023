@@ -1,0 +1,25 @@
+class Solution {
+public
+    vectorint topKFrequent(vectorint& nums, int k) {
+        mapint,int mp;
+        priority_queuepairint,int  pq;
+        for(int i=0;inums.size();i++)
+        {
+            mp[nums[i]]++;
+        }
+        for(auto it=mp.begin()++;it!=mp.end();it++)
+        {
+             coutit-first;
+            pq.push({it-second,it-first});
+        }
+        vectorint ans;
+        int m=1;
+        while(m=k)
+        {
+           ans.push_back(pq.top().second);
+           pq.pop();
+            m++;
+        }
+        return ans;
+    }
+};
