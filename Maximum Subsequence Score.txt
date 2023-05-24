@@ -24,6 +24,10 @@ public:
             if(pq.size()==k){
                 maxcost=max(maxcost,curr*a.first);
             }
+
+
+
+
         }
 
         return maxcost;
