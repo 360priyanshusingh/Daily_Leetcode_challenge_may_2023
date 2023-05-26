@@ -1,0 +1,37 @@
+class Solution {
+public:
+    int helper(vector<int>& piles,int m,int startindex,int trun,vector<vector<vector<int>>> &dp){
+        if(startindex >=piles.size()){
+            return 0;
+        }
+        if(dp[m][startindex][trun]!=-1) return dp[m][startindex][trun];
+        int takecount=0;
+        int ans=(trun==0)?0:INT_MAX;
+
+        for(int x=1;x<=(2*m);x++){
+            int pileindex=startindex+x-1;
+
+            if(pileindex>=piles.size()) break;
+            takecount+=piles[pileindex];
+
+            if(trun==0){
+                int nx=helper(piles,max(x,m),pileindex+1,1,dp);
+                int to=nx+takecount;
+                ans=max(ans,to);
+            }
+            else{
+            int nx=helper(piles,max(x,m),pileindex+1,0,dp);
+              ans=min(ans,nx);
+            }
+        }
+
+        return dp[m][startindex][trun]=ans;
+    }
+    int stoneGameII(vector<int>& piles) {
+        
+        int n=piles.size();
+        vector<vector<vector<int>>> dp(n+1,vector<vector<int>> (n,vector<int>(2,-1)));
+        int ans=helper(piles,1,0,0 ,dp);
+        return ans;
+    }
+};
