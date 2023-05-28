@@ -1,0 +1,27 @@
+class Solution {
+public:
+     int   dp[101][101];  
+    int minCost(int start,int end,vector<int> &cuts,int cuts_start,int cuts_end){
+        if(cuts_start>cuts_end) return 0;
+
+        if(dp[cuts_start][cuts_end]!=-1)
+             return dp[cuts_start][cuts_end];
+
+         int minmun=INT_MAX;
+
+         for(int i=cuts_start;i<=cuts_end;i++){
+             minmun=min(minmun,(end-start)
+               + minCost(start,cuts[i],cuts,cuts_start,i-1)+
+               minCost(cuts[i],end,cuts,i+1,cuts_end)
+             );
+         } 
+
+         return  dp[cuts_start][cuts_end]=minmun;
+    }
+    int minCost(int n, vector<int>& cuts) {
+        memset(dp,-1,sizeof(dp));
+        sort(cuts.begin(),cuts.end());
+        return minCost(0,n,cuts,0,cuts.size()-1);
+
+    }
+};
