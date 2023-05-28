@@ -9,8 +9,6 @@ public:
 
          int minmun=INT_MAX;
 
-
-
          for(int i=cuts_start;i<=cuts_end;i++){
              minmun=min(minmun,(end-start)
                + minCost(start,cuts[i],cuts,cuts_start,i-1)+
