@@ -1,0 +1,35 @@
+class UndergroundSystem {
+
+    unordered_map<int,pair<string,int> > mp1;
+    unordered_map<string,pair<int,int> > mp2;
+
+public:
+    UndergroundSystem() {
+    }
+
+    void checkIn(int id, string stationName, int t) {
+        mp1[id]={stationName,t};
+    }
+    
+    void checkOut(int id, string stationName, int t) {
+        auto a= mp1[id];
+        mp1.erase(id);
+        string sname=a.first+" "+stationName;
+        mp2[sname].first+=t-a.second;
+        mp2[sname].second+=1;
+    }
+    
+    double getAverageTime(string startStation, string endStation){
+          string sname=startStation+" "+endStation;
+           auto &r=mp2[sname];
+           return (double)(r.first*1.0/r.second);
+    }
+};
+
+/**
+ * Your UndergroundSystem object will be instantiated and called as such:
+ * UndergroundSystem* obj = new UndergroundSystem();
+ * obj->checkIn(id,stationName,t);
+ * obj->checkOut(id,stationName,t);
+ * double param_3 = obj->getAverageTime(startStation,endStation);
+ */
